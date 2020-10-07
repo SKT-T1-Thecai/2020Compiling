@@ -86,7 +86,9 @@ public class program{
                         if(isAlpha(ch[j]))
                         {
                             System.out.println(work(new String(ch).substring(0,j)));
-                            break;
+                            ch=new String(ch).substring(j,ch.length).toCharArray();
+                            j=-1;
+                            continue;
                             //analyse(new String(ch).substring(j+1,ch.length+1).toCharArray());
                         }
                     }
@@ -100,7 +102,7 @@ public class program{
         }
 
     public static void main(String[] args) throws IOException {
-        //String Path="D:\\IDEA projects\\work10_9\\test.txt";
+    
         String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);

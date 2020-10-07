@@ -33,8 +33,8 @@ public class program{
 
             for(int i=0;i<s.length();i++)
             {
-                  if(s.charAt(i)!='0'||i==s.length()-1)
-                    return "Int("+s.substring(i,s.length())+")";
+                if(s.charAt(i)!='0'||i==s.length()-1)
+                    return "Int("+s.substring(i)+")";
             }
 
 
@@ -77,14 +77,14 @@ public class program{
                         System.out.println("Colon");
                         break;
                     } else {
-                        System.out.println("Unknown");
+                        System.out.println("Unknown1111111");
                         return;
                     }
                 } else {
                     if (sign == 1) {
                         if (!isAlpha(ch[j])&&!isInt(ch[j]))
                         {
-                            System.out.println("Unknown");
+                            System.out.println("Unknown222222222");
                             return;
                         }
                     }
@@ -100,7 +100,7 @@ public class program{
                         }
                         else if(!isInt(ch[j]))
                         {
-                            System.out.println("Unknown");
+                            System.out.println("Unknown3333333333");
                             return;
                         }
                     }
@@ -114,8 +114,8 @@ public class program{
         }
 
     public static void main(String[] args) throws IOException {
-     
-        String Path=args[0];
+       
+       String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);
         byte[] buf = new byte[4096];
@@ -130,8 +130,6 @@ public class program{
                 str[pos++]=(char)buf[i];
             }
             analyse(str);
-
-
         }
     }
 }

@@ -33,7 +33,7 @@ public class program{
 
             for(int i=0;i<s.length();i++)
             {
-                if(s.charAt(i)!='0')
+                  if(s.charAt(i)!='0'||i==s.length()-1)
                     return "Int("+s.substring(i,s.length())+")";
             }
 

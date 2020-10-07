@@ -29,9 +29,17 @@ public class program{
             return "Else";
         else if(isAlpha(s.charAt(0)))
             return "Ident("+s+")";
-        else return "Int("+s+")";
+        else {
+
+            for(int i=0;i<s.length();i++)
+            {
+                if(s.charAt(i)!='0')
+                    return "Int("+s.substring(i,s.length())+")";
+            }
 
 
+        }
+    return "";
     }
     public static void analyse(char[] str) {
         String s = new String(str);

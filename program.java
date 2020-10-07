@@ -84,7 +84,7 @@ public class program{
                     if (sign == 1) {
                         if (!isAlpha(ch[j])&&!isInt(ch[j]))
                         {
-                            System.out.println("Unknown222222222");
+                            System.out.println(ch);
                             return;
                         }
                     }

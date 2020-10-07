@@ -13,147 +13,109 @@ public class program{
     {
         return (s>='a'&&s<='z')||(s>='A'&&s<='Z');
     }
-    public static void analyse(char[] str)
+    public static String work(String s)
     {
-        char[] stack=new char[str.length];
-        System.out.println(str);
-     int pos=0;
-     int sign=0;
-     for(int i=0;i<str.length;i++)
-     {
-         if(str[i]=='\r'&&str[i+1]=='\n')
-         {
-             i++;
-             continue;
-         }
-         if(pos==0)//stack为空
-         {
-             stack[pos++]=str[i];
-             if(isInt(stack[0]))
-                 sign=1;
-             else if(isAlpha(stack[0]))
-                 sign=2;
-             else sign=3;
-         }else{
-            if(sign==1&&!isInt(str[i]))
-            {
-                System.out.println("Int("+new String(stack).substring(0,pos)+")");
-                pos=0;
-                sign=0;
-                i--;
-                continue;
-            }
-            else if(sign==2&&!isInt(str[i])&&!isAlpha(str[i]))
-            {
-                System.out.println("Ident("+new String(stack).substring(0,pos)+")");
-                pos=0;
-                i--;
-                continue;
-            }
-            else stack[pos++]=str[i];
-         }
-
-
-         String test= new String(stack).substring(0,pos);
-         if(test.equals("BEGIN"))
-         {
-             System.out.println("Begin");
-             pos=0;
-             continue;
-         }
-         if(test.equals("END"))
-         {
-             System.out.println("End");
-             pos=0;
-             continue;
-         }
-         if(test.equals("FOR"))
-         {
-             System.out.println("For");
-             pos=0;
-             continue;
-         }
-         if(test.equals("IF"))
-         {
-             System.out.println("If");
-             pos=0;
-             continue;
-         }
-         if(test.equals("THEN"))
-         {
-             System.out.println("Then");
-             pos=0;
-             continue;
-         }
-         if(test.equals("ELSE"))
-         {
-             System.out.println("Else");
-             pos=0;
-             continue;
-         }
-         if(test.equals(":")&&str[i+1]!='=') {
-             System.out.println("Colon");
-             pos=0;
-             continue;
-         }
-         if(test.equals("+"))
-         {
-             System.out.println("Plus");
-             pos=0;
-             continue;
-         }
-         if(test.equals("*"))
-         {
-             System.out.println("Star");
-             pos=0;
-             continue;
-         }
-         if(test.equals(","))
-         {
-             System.out.println("Comma");
-             pos=0;
-             continue;
-         }
-         if(test.equals("("))
-         {
-             System.out.println("LParenthesis");
-             pos=0;
-             continue;
-         }
-         if(test.equals(")"))
-         {
-             pos=0;
-             System.out.println("RParenthesis");
-             continue;
-         }
-         if(test.equals(":="))
-         {
-             System.out.println("Assign");
-             pos=0;
-             continue;
-         }
-
-
-     }
-
+        if(s.equals("BEGIN"))
+            return "Begin";
+        else if (s.equals("END"))
+            return "End";
+        else if (s.equals("FOR"))
+            return "For";
+        else if (s.equals("IF"))
+            return "If";
+        else if (s.equals("THEN"))
+            return "Then";
+        else if (s.equals("ELSE"))
+            return "Else";
+        else if(isAlpha(s.charAt(0)))
+            return "Ident("+s+")";
+        else return "Int("+s+")";
 
 
     }
+    public static void analyse(char[] str) {
+        System.out.println(str);
+        String s = new String(str);
+
+        String[] arr = s.split("\\s+");
+        int sign = 0;
+        for (int i = 0; i < arr.length; i++) {
+
+            char[] ch = arr[i].toCharArray();
+            for (int j = 0; j < ch.length; j++) {
+                if (j == 0) {
+                    if (isAlpha(ch[j]))
+                        sign = 1;
+                    else if (isInt(ch[j]))
+                        sign = 2;
+                    else if (ch[j] == '+' && ch.length == 1) {
+                        System.out.println("Plus");
+                        break;
+                    } else if (ch[j] == '*' && ch.length == 1) {
+                        System.out.println("Star");
+                        break;
+                    } else if (ch[j] == ',' && ch.length == 1) {
+                        System.out.println("Comma");
+                        break;
+                    } else if (ch[j] == '(' && ch.length == 1) {
+                        System.out.println("LParenthesis");
+                        break;
+                    } else if (ch[j] == ')' && ch.length == 1) {
+                        System.out.println("RParenthesis");
+                        break;
+                    } else if (ch[j] == ':' && ch.length == 2 && ch[j + 1] == '=') {
+                        System.out.println("Assign");
+                        break;
+                    } else if (ch[j] == ':' && ch.length == 1) {
+                        System.out.println("Colom");
+                        break;
+                    } else {
+                        System.out.println("Unknown");
+                        return;
+                    }
+                } else {
+                    if (sign == 1) {
+                        if (!isAlpha(ch[j])&&!isInt(ch[j]))
+                        {
+                            System.out.println("Unknown");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(isAlpha(ch[j]))
+                        {
+                            System.out.println(work(new String(ch).substring(0,j)));
+                            break;
+                            //analyse(new String(ch).substring(j+1,ch.length+1).toCharArray());
+                        }
+                    }
+                }
+                if(j==ch.length-1)
+                {
+                    System.out.println(work(new String(ch)));
+                    }
+                }
+            }
+        }
+
     public static void main(String[] args) throws IOException {
-       // String Path="D:\\IDEA projects\\work10_9\\test.txt";
+        //String Path="D:\\IDEA projects\\work10_9\\test.txt";
         String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);
         byte[] buf = new byte[4096];
-        while(f.read(buf) !=-1){
-           //System.out.println(Arrays.toString(buf));
-          char[] str=new char[buf.length];
-          int pos=0;
-          for(byte b : buf)
-          {
-                str[pos++]=(char)(b);
-          }
-          analyse(str);
+        int len=0;
+        while((len=f.read(buf)) !=-1){
+            //System.out.println(Arrays.toString(buf));
+
+            char[] str=new char[len];
+            int pos=0;
+            for(int i=0;i<len;i++)
+            {
+                str[pos++]=(char)buf[i];
+            }
+            analyse(str);
 
 
         }

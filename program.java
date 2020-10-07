@@ -34,7 +34,7 @@ public class program{
 
     }
     public static void analyse(char[] str) {
-        System.out.println(str);
+   
         String s = new String(str);
 
         String[] arr = s.split("\\s+");

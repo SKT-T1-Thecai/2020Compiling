@@ -110,6 +110,11 @@ public class program{
                         continue;
 
                     }
+                    else {
+                        System.out.println("Unknown");
+                        return;
+                    }
+
                 }
                 else
                     {
@@ -165,7 +170,7 @@ public class program{
     }
 
     public static void main(String[] args) throws IOException {
-   
+     
         String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);

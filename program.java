@@ -34,7 +34,6 @@ public class program{
 
     }
     public static void analyse(char[] str) {
-   
         String s = new String(str);
 
         String[] arr = s.split("\\s+");
@@ -67,7 +66,7 @@ public class program{
                         System.out.println("Assign");
                         break;
                     } else if (ch[j] == ':' && ch.length == 1) {
-                        System.out.println("Colom");
+                        System.out.println("Colon");
                         break;
                     } else {
                         System.out.println("Unknown");
@@ -102,7 +101,7 @@ public class program{
         }
 
     public static void main(String[] args) throws IOException {
-    
+      
         String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);

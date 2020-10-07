@@ -90,6 +90,11 @@ public class program{
                             continue;
                             //analyse(new String(ch).substring(j+1,ch.length+1).toCharArray());
                         }
+                        else if(!isInt(ch[j]))
+                        {
+                            System.out.println("Unknown");
+                            return;
+                        }
                     }
                 }
                 if(j==ch.length-1)
@@ -101,7 +106,7 @@ public class program{
         }
 
     public static void main(String[] args) throws IOException {
-      
+     
         String Path=args[0];
         File  file=new File(Path);
         FileInputStream f=new FileInputStream(file);
